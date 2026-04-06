@@ -92,15 +92,15 @@ if 7 <= hour <= 10 or 16 <= hour <= 20:
 # ----------------------------
 st.subheader("🗺️ Route Map")
 
-route_path = pd.DataFrame({
-    "lat": [selected["LAT"], selected["LAT"] + 0.01],
-    "lon": [selected["LON"], selected["LON"] + 0.01]
-})
+route_path = [
+    [selected["LON"], selected["LAT"]],
+    [selected["LON"] + 0.01, selected["LAT"] + 0.01]
+]
 
 layer = pdk.Layer(
     "PathLayer",
-    data=[route_path],
-    get_path='[lon, lat]',
+    data=[{"path": route_path}],
+    get_path="path",
     get_width=5,
     get_color=[255, 0, 0],
 )
